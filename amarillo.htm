@@ -2,6 +2,116 @@
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<style type="text/css">
+
+.main {
+width:200px;
+border:1px solid black;
+}
+
+.month {
+background-color:black;
+font:bold 12px verdana;
+color:white;
+}
+
+.daysofweek {
+background-color:gray;
+font:bold 12px verdana;
+color:white;
+}
+
+.days {
+font-size: 12px;
+font-family:verdana;
+color:black;
+background-color: lightyellow;
+padding: 2px;
+}
+
+.days #today{
+font-weight: bold;
+color: red;
+}
+
+</style>
+
+
+<script type="text/javascript" src="basiccalendar.js">
+
+/***********************************************
+* Basic Calendar-By Brian Gosselin at http://scriptasylum.com/bgaudiodr/
+* Script featured on Dynamic Drive (http://www.dynamicdrive.com)
+* This notice must stay intact for use
+* Visit http://www.dynamicdrive.com/ for full source code
+***********************************************/
+
+</script> 
+<link rel="stylesheet" href="ddcubeclass.css" />
+
+<style>
+
+/* 2nd demo specific CSS */
+#dynamicfuturedate .ddcubecountdown{
+	display: block; /* display each cube on its own line */
+	margin-bottom: 5px;
+	font-size: 8px; /* adjust font size to scale up/down the cubes (default is 10px) */
+}
+
+#dynamicfuturedate ul li{
+	background: darkred;
+}
+
+</style>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script src="ddcubeclass.js"></script>
+
+<script src="ddcubecountdown.js">
+
+/***********************************************
+* 3D Cube Countdown script- (c) Dynamic Drive DHTML code library (www.dynamicdrive.com)
+* Please keep this notice intact
+* Visit Dynamic Drive at http://www.dynamicdrive.com/ for this script and 100s more
+***********************************************/
+
+</script>
+
+<script>
+
+
+jQuery(function($){ // on DOM load
+
+//Eg #1
+	var mycountdown = new cubecountdown({
+		containerid: 'futuredate',
+		targetdate: 'October 17, 2018 11:26:30',
+		size: ['10em', '6em'], // specify cube dimensions in "em" only
+		unit: ['days']
+	})
+
+	mycountdown.onEnd = function(){ // when target date has arrived
+		$('#futuredate').html('<b>That date has arrived!</b>')
+	}
+
+
+//Eg #2
+	var christmasday = new Date( new Date().getFullYear(), 11, 25) // construct future date string dynamically
+
+	var christmascountdown = new cubecountdown({
+		containerid: 'dynamicfuturedate',
+		targetdate: christmasday,
+		unit: ['days']
+	})
+
+	christmascountdown.onEnd = function(){ // when target date has arrived
+		$('#dynamicfuturedate').html('<b>Christmas has arrived!</b>')
+	}
+
+})
+
+</script>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <title>Untitled Document</title>
 <style type="text/css">
@@ -29,5 +139,220 @@ body {
 <div id="Layer3" style="position:absolute; left:284px; top:113px; width:310px; height:57px; z-index:3">
   <div align="center">Bienvenidos al centro de computo de la empresa, para nosotros es un verdadero gusto poder atormentarlos hasta la locura. </div>
 </div>
+<div id="Layer4" style="position:absolute; left:902px; top:8px; width:253px; height:200px; z-index:4"><script type="text/javascript">
+
+var todaydate=new Date()
+var curmonth=todaydate.getMonth()+1 //get current month (1-12)
+var curyear=todaydate.getFullYear() //get current year
+
+document.write(buildCal(curmonth ,curyear, "main", "month", "daysofweek", "days", 1));
+</script></div>
 </body>
+<script>
+
+
+
+/******************************************
+
+* Cross browser cursor trailer script- By Brian Caputo (bcaputo@icdc.com)
+
+* Visit Dynamic Drive (http://www.dynamicdrive.com/) for full source code
+
+* Modified Dec 30th, 02' by DD. This notice must stay intact for use
+
+******************************************/
+
+
+
+A=document.getElementById
+
+B=document.all;
+
+C=document.layers;
+
+T1=new Array("trail1.gif",38,35,"trail2.gif",30,31,"trail3.gif",28,26,"trail4.gif",22,21,"trail5.gif",16,16,"trail6.gif",10,10)
+
+
+
+var offsetx=15 //x offset of trail from mouse pointer
+
+var offsety=10 //y offset of trail from mouse pointer
+
+
+
+nos=parseInt(T1.length/3)
+
+rate=50
+
+ie5fix1=0;
+
+ie5fix2=0;
+
+rightedge=B? document.body.clientWidth-T1[1] : window.innerWidth-T1[1]-20
+
+bottomedge=B? document.body.scrollTop+document.body.clientHeight-T1[2] : window.pageYOffset+window.innerHeight-T1[2]
+
+
+
+for (i=0;i<nos;i++){
+
+createContainer("CUR"+i,i*10,i*10,i*3+1,i*3+2,"","<img src='"+T1[i*3]+"' width="+T1[(i*3+1)]+" height="+T1[(i*3+2)]+" border=0>")
+
+}
+
+
+
+function createContainer(N,Xp,Yp,W,H,At,HT,Op,St){
+
+with (document){
+
+write((!A && !B) ? "<layer id='"+N+"' left="+Xp+" top="+Yp+" width="+W+" height="+H : "<div id='"+N+"'"+" style='position:absolute;left:"+Xp+"; top:"+Yp+"; width:"+W+"; height:"+H+"; ");
+
+if(St){
+
+if (C)
+
+write(" style='");
+
+write(St+";' ")
+
+}
+
+else write((A || B)?"'":"");
+
+write((At)? At+">" : ">");
+
+write((HT) ? HT : "");
+
+if (!Op)
+
+closeContainer(N)
+
+}
+
+}
+
+
+
+function closeContainer(){
+
+document.write((A || B)?"</div>":"</layer>")
+
+}
+
+
+
+function getXpos(N){
+
+if (A)
+
+return parseInt(document.getElementById(N).style.left)
+
+else if (B)
+
+return parseInt(B[N].style.left)
+
+else
+
+return C[N].left
+
+}
+
+
+
+function getYpos(N){
+
+if (A)
+
+return parseInt(document.getElementById(N).style.top)
+
+else if (B)
+
+return parseInt(B[N].style.top)
+
+else
+
+return C[N].top
+
+}
+
+
+
+function moveContainer(N,DX,DY){
+
+c=(A)? document.getElementById(N).style : (B)? B[N].style : (C)? C[N] : "";
+
+if (!B){
+
+rightedge=window.innerWidth-T1[1]-20
+
+bottomedge=window.pageYOffset+window.innerHeight-T1[2]
+
+}
+
+c.left=Math.min(rightedge, DX+offsetx) + 'px';
+
+c.top=Math.min(bottomedge, DY+offsety) + 'px';
+
+}
+
+function cycle(){
+
+//if (IE5) 
+
+if (document.all&&window.print){
+
+ie5fix1=document.body.scrollLeft;
+
+ie5fix2=document.body.scrollTop;
+
+}
+
+for (i=0;i<(nos-1);i++){
+
+moveContainer("CUR"+i,getXpos("CUR"+(i+1)),getYpos("CUR"+(i+1)))
+
+}
+
+}
+
+
+
+function newPos(e){
+
+moveContainer("CUR"+(nos-1),(B)?event.clientX+ie5fix1:e.pageX+2,(B)?event.clientY+ie5fix2:e.pageY+2)
+
+}
+
+
+
+function getedgesIE(){
+
+rightedge=document.body.clientWidth-T1[1]
+
+bottomedge=document.body.scrollHeight-T1[2]
+
+}
+
+
+
+if (B){
+
+window.onload=getedgesIE
+
+window.onresize=getedgesIE
+
+}
+
+
+
+if(document.layers)
+
+document.captureEvents(Event.MOUSEMOVE)
+
+document.onmousemove=newPos
+
+setInterval("cycle()",rate)
+
+</script>
 </html>
